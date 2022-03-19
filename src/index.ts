@@ -1,5 +1,6 @@
-import axios from 'axios';
-import { User } from './models/User';
+import axios, { AxiosResponse } from 'axios';
+import { User, UserProps } from './models/User';
+import { Collection } from './models/Collection';
 
 // ///////////////////
 // // axios.post('http://localhost:3000/users', {name: 'name', age: 1})
@@ -45,9 +46,9 @@ import { User } from './models/User';
 // const newUser = new User({ name: 'new record', age: 0 });
 // // newUser.save();
 
-////////////////////////////////
-// refactor using composition nd inheritance
-////////////////////////////////
+////////////////////////////////////////////////
+// refactor using composition and inheritance //
+////////////////////////////////////////////////
 
 // const newUser = User.buildUser({ name: 'joe', age: 9 });
 // newUser.on('save', () => {
@@ -55,10 +56,45 @@ import { User } from './models/User';
 // });
 // newUser.save();
 
-const user = User.buildUser({ id: 1 });
+// const user = User.buildUser({ id: 1 });
 
-user.on('change', () => {
-  console.log(user);
-});
+// user.on('change', () => {
+//   console.log(user);
+// });
 
-user.fetch();
+// user.fetch();
+
+///////////////////////////////
+// adding a Collection class //
+///////////////////////////////
+
+// const collection = new Collection('http://localhost:3000/users');
+
+// collection.fetch();
+
+// collection.on('change', () => {
+//   console.log(collection.models);
+// });
+
+////////////////////////////////////////////////////
+/// transforming Collection into a generic class ///
+////////////////////////////////////////////////////
+
+// const collection = new Collection<User, UserProps>(
+//   'http://localhost:3000/users',
+//   (json: UserProps) => User.buildUser(json)
+// );
+// collection.fetch();
+// collection.on('change', () => {
+//   console.log(collection.models);
+// });
+
+///////////////////
+// after refactor//
+///////////////////
+
+// const collection = User.buildUserCollection();
+// collection.fetch();
+// collection.on('change', () => {
+//   console.log(collection);
+// });
