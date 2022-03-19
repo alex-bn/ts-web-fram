@@ -50,9 +50,3 @@ import { User } from './models/User';
 ////////////////////////////////
 
 const user = new User({ name: 'new name', age: 0 });
-
-user.events.on('change', () => {
-  console.log('change was triggered');
-});
-
-user.events.trigger('change');
