@@ -49,4 +49,18 @@ import { User } from './models/User';
 // refactor using composition
 ////////////////////////////////
 
-const user = new User({ name: 'new name', age: 0 });
+const user = new User({ id: 1, name: 'new name record', age: 24 });
+
+// console.log(user.get('name'));
+
+// user.on('change', () => {
+//   console.log(user.attributes);
+// });
+
+// user.fetch();
+
+user.on('save', () => {
+  console.log(user);
+});
+
+user.save();
