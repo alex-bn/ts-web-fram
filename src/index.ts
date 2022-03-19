@@ -46,21 +46,19 @@ import { User } from './models/User';
 // // newUser.save();
 
 ////////////////////////////////
-// refactor using composition
+// refactor using composition nd inheritance
 ////////////////////////////////
 
-const user = new User({ id: 1, name: 'new name record', age: 24 });
-
-// console.log(user.get('name'));
-
-// user.on('change', () => {
-//   console.log(user.attributes);
+// const newUser = User.buildUser({ name: 'joe', age: 9 });
+// newUser.on('save', () => {
+//   console.log(newUser, 'user was saved');
 // });
+// newUser.save();
 
-// user.fetch();
+const user = User.buildUser({ id: 1 });
 
-user.on('save', () => {
+user.on('change', () => {
   console.log(user);
 });
 
-user.save();
+user.fetch();
